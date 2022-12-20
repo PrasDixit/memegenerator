@@ -9,15 +9,34 @@
 body {
   font-family: "Rubik Vinyl", sans-serif;
   color: #f0f8ff;
-  background-color: #ddd;
 }
 
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #f0f8ff;
+}
+
+button {
+  cursor: pointer;
+  color: #f0f8ff;
+  background-color: #27597e;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+}
+
+/* !Header */
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.675rem;
-  background-image: linear-gradient(to bottom, #244f67, #27597e, #244f67);
+  background-image: linear-gradient(to bottom, #244f67, #2e5c7f, #244f67);
   background-attachment: fixed;
 }
 
@@ -31,4 +50,49 @@ body {
   justify-content: center;
   align-items: center;
   margin-right: 1rem;
+}
+
+/* !Meme */
+#form {
+  max-width: 80%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px 40px;
+}
+
+#form .btn {
+  margin-top: 10px;
+  width: 100%;
+}
+
+#form input {
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin: 20px 40px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 20px;
+  width: 100%;
+  color: #244f67;
+}
+
+#form input:focus {
+  border: 1px solid #27597e;
+}
+
+#form .text {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* !Meme Image */
+.memeimg {
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
