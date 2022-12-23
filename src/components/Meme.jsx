@@ -2,29 +2,59 @@ import { useState } from "react";
 import memes from "../memesdata";
 
 const Meme = () => {
-  const [memeImage, setMemeImage] = useState("https://i.imgflip.com/1bil.jpg");
+
+  const [meme, setMeme] = useState({
+    topText: "",
+    bottomText: "",
+    randomImg: "http://i.imgflip.com/1bij.jpg",
+  });
+
+  const [allMemeImages, setAllMemeImages] = useState(memes);
+
 
   const getMemeImg = () => {
-    const memesArray = memes.data.memes;
+    const memesArray = allMemeImages.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const memeImg = memesArray[randomNumber].url;
+    const url = memesArray[randomNumber].url;
+    setMeme(prevMeme => {
+      return (
+        {
+          ...prevMeme,
+          randomImg: url,
 
-    setMemeImage(memeImg);
+        }
+      )
+    })
+
   };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setMeme(prevMeme => {
+      return (
+        {
+          ...prevMeme,
+          [name]: value
+        }
+      )
+    })
+  }
 
   return (
     <>
       <div id="form">
         <div className="text">
-          <input type="text" placeholder="Top Text" />
-          <input type="text" placeholder="Bottom Text" />
+          <input type="text" placeholder="Top Text" name="topText" value={meme.topText} onChange={handleChange} />
+          <input type="text" placeholder="Bottom Text" name="bottomText" value={meme.bottomText} onChange={handleChange} />
         </div>
         <button className="btn" onClick={getMemeImg}>
           Generate a new Meme image
         </button>
       </div>
       <div className="memeimg">
-        <img src={memeImage} alt="Meme_Img" />
+        {meme.randomImg === "" ? '' : <img src={meme.randomImg} alt="Meme_Img" className="meme-img" />}
+        <h2 className="meme--text top">{meme.topText}</h2>
+        <h2 className="meme--text bottom">{meme.bottomText}</h2>
       </div>
     </>
   );
