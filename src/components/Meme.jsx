@@ -10,20 +10,32 @@ const Meme = () => {
   });
 
   // eslint-disable-next-line
-  const [allMemes, setAllMemes] = useState({});
+  const [allMemes, setAllMemes] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("https://api.imgflip.com/get_memes")
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setAllMemes(data.data.memes);
+
+  //     })
+  // }, []);
+
+  // !OR using async await
 
   useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
-      .then(res => res.json())
-      .then(data => {
-        setAllMemes(data);
-      })
-  }, []);
+    const getMemes = async () => {
+      const res = await fetch("https://api.imgflip.com/get_memes")
+      const data = await res.json()
+      setAllMemes(data.data.memes)
+    }
+    getMemes()
+  }, [])
+
 
   const getMemeImg = () => {
-    const memesArray = allMemes.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const url = memesArray[randomNumber].url;
+    const randomNumber = Math.floor(Math.random() * allMemes.length);
+    const url = allMemes[randomNumber].url;
     setMeme(prevMeme => {
       return (
         {
@@ -33,7 +45,6 @@ const Meme = () => {
         }
       )
     })
-
   };
 
   const handleChange = (event) => {
